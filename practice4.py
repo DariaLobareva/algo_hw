@@ -33,20 +33,20 @@ def is_consistent(n, same_pairs, diff_pairs):
         graph[ru].append(rv)
         graph[rv].append(ru)
 
-    color = {}
+    label = {}
     
     for start in graph:
-        if start not in color:
+        if start not in label:
             queue = deque([start])
-            color[start] = 0
+            label[start] = 0
             
             while queue:
                 v = queue.popleft()
                 for to in graph[v]:
-                    if to not in color:
-                        color[to] = 1 - color[v]
+                    if to not in label:
+                        label[to] = 1 - label[v]
                         queue.append(to)
-                    elif color[to] == color[v]:
+                    elif label[to] == label[v]:
                         return False
     
     return True
